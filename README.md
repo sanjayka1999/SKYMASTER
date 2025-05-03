@@ -55,6 +55,37 @@ Below is the list of hardware components used in this project:
 
 ## 💻 Software Setup
 
+### **Software for Configuration of Pixhwak 6x Flight Controller**
+**QGroundControl**
+System Requirements
+QGC should run well on any modern computer or mobile device. Performance will depend on the system environment, 3rd party applications, and available system resources. More capable hardware will provide a better experience. A computer with at least 8Gb RAM, an SSD, Nvidia or AMD graphics and an i5 or better CPU will be suitable for most applications.
+
+For the best experience and compatibility, we recommend you the newest version of your operating system.
+Mac OS X
+QGroundControl can be installed on macOS 10.11 or later:
+
+Download QGroundControl.dmg.
+Double-click the .dmg file to mount it, then drag the QGroundControl application to your Application folder.
+INFO
+
+QGroundControl continues to not be signed which causes problem on Catalina. To open QGC app for the first time:
+
+Right-click the QGC app icon, select Open from the menu. You will only be presented with an option to Cancel. Select Cancel.
+Right-click the QGC app icon again, Open from the menu. This time you will be presented with the option to Open.
+
+Windows
+QGroundControl can be installed on 64 bit versions of Windows:
+
+Download QGroundControl-installer.exe.
+Double click the executable to launch the installer.
+INFO
+
+The Windows installer creates 3 shortcuts: QGroundControl, GPU Compatibility Mode, GPU Safe Mode. Use the first shortcut unless you experience startup or video rendering issues. For more information see Troubleshooting QGC Setup > Windows: UI Rendering/Video Driver Issues.
+
+INFO
+
+Prebuilt QGroundControl versions from 4.0 onwards are 64-bit only. It is possible to manually build 32 bit versions (this is not supported by the dev team).
+
 ### **Step 1: [Operating System Installation](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html)**
 - Install a compatible Linux distribution like **Ubuntu** or **Armbian** on the Orange Pi 5.
 
