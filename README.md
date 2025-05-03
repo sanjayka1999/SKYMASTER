@@ -1,6 +1,6 @@
 # SKYMASTER
 Advanced Drone Building Guide 
-# Advanced Drone Building Using AI
+# Advanced Drone Building Using Single Board Computer
 
 This repository contains all the necessary resources, code, and guidelines to build an advanced drone with features like **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command**. The project leverages cutting-edge technologies, including the **Orange Pi 5 pro**, **reCamera**, **ReSpeaker USB Mic Array**, **TFMini Plus LiDAR**, and **Pixhawk 6X**.
 
