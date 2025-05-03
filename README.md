@@ -55,7 +55,7 @@ Below is the list of hardware components used in this project:
 
 ## 💻 Software Setup
 
-### **Step 1: Operating System Installation**
+### **Step 1: [Operating System Installation](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html)**
 - Install a compatible Linux distribution like **Ubuntu** or **Armbian** on the Orange Pi 5.
 
 ### **Step 2: Install Software Dependencies**
@@ -92,7 +92,7 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-### **2. ReSpeaker USB Mic Array**
+### **2. ReSpeaker USB Mic Array(Optional)**
 Capture voice commands using PyAudio:
 ```python
 import pyaudio
@@ -191,5 +191,5 @@ By following this guide, you’ll successfully build a feature-rich drone capabl
 ## 🤝 Contribution and Contact
 
 Feel free to contribute to this project! Open a pull request or contact me for questions:
-- **Email**: [your_email@example.com]
+- **Email**: [sanjaykathula7@gmail.com]
 - **GitHub**: [github.com/sanjayka1999](https://github.com/sanjayka1999)
