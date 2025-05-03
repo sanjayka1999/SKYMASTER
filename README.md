@@ -1,24 +1,20 @@
-# SKYMASTER
-Advanced Drone Building Guide
-
-# Advanced Drone Building Using Single Board Computer
-
-This repository contains all the necessary resources, code, and guidelines to build an advanced drone with features like **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command**. The project leverages cutting-edge technologies, including the **Orange Pi 5 Pro**, **reCamera**, **ReSpeaker USB Mic Array**, **TFMini Plus LiDAR**, and **Pixhawk 6X**.
+# SKYMASTER - Advanced AI Drone with Orange Pi 5 Pro
+A complete guide to building an autonomous drone with **Follow-Me**, **Obstacle Avoidance**, **Gesture Control**, and **Voice Commands** using cutting-edge hardware and software integration.
 
 ---
 
-## 📌 Goals
+## 📌 Overview
 
-The primary objective is to design and implement a fully functional drone that integrates AI-based features with robust hardware capabilities. The drone will support:
+This project transforms an **Orange Pi 5 Pro** into the brain of an advanced AI-powered drone, integrating:
 
-- **Follow-Me**: Automatically follow a target based on visual data.
-- **Obstacle Avoidance**: Detect and avoid obstacles in real time.
-- **Gesture Control**: Respond to specific hand gestures for control.
-- **Voice Command**: Execute commands based on voice inputs (optional).
+✅ **Follow-Me Mode** (Computer Vision Tracking)  
+✅ **Obstacle Avoidance** (LiDAR + AI)  
+✅ **Gesture Control** (Hand Tracking)  
+✅ **Voice Commands** (Optional)
 
 ---
 
-## 📂 Hardware Components
+## 📂 Key Hardware
 
 | **Component**           | **Purpose**                                                                 |
 |--------------------------|-----------------------------------------------------------------------------|
@@ -30,47 +26,46 @@ The primary objective is to design and implement a fully functional drone that i
 
 ---
 
-## 🛠️ Hardware Connections
+## 🛠️ Hardware Setup
 
-### **Orange Pi 5 Pro Connections**
-1. **reCamera**:
-   - Connect to **USB 3.0** or **MIPI CSI** interface.
-   - Mount with an unobstructed view.
-2. **ReSpeaker USB Mic Array (Optional)**:
-   - Connect to **USB 3.0** port.
-3. **TFMini Plus LiDAR**:
-   - Connect to **UART** (e.g., `/dev/ttyS0`) or **I2C**.
-   - Mount facing forward for obstacle detection.
-4. **Pixhawk 6X**:
-   - Connect via **UART** (e.g., `/dev/ttyAMA0`) for MAVLink communication.
-   - Use **Telemetry Radio (SiK Radio)** for wireless communication.
-5. **Power Supply**:
-   - Use a 5V power module from the **Power Distribution Board (PDB)**.
+### **1. Orange Pi 5 Pro Connections**
+
+| **Component**   | **Connection**        | **Notes**                                                                 |
+|------------------|-----------------------|---------------------------------------------------------------------------|
+| **reCamera**    | USB 3.0 or MIPI CSI   | Test with `v4l2-ctl --list-devices`.                                      |
+| **ReSpeaker Mic**| USB 3.0              | Verify with `pyaudio`.                                                   |
+| **TFMini LiDAR** | UART (`/dev/ttyS0`)   | Enable UART in `raspi-config`.                                           |
+| **Pixhawk 6X**   | UART (`/dev/ttyAMA0`) | Baudrate: 57600.                                                         |
+
+### **2. Pixhawk 6X Wiring**
+
+| **Pixhawk Port** | **Orange Pi Port** |
+|-------------------|--------------------|
+| TELEM2 TX         | RX (Orange Pi)     |
+| TELEM2 RX         | TX (Orange Pi)     |
+| GND               | GND                |
 
 ---
 
-## 💻 Software Setup (MacOS & Orange Pi 5 Pro)
+## 💻 Software Installation
 
-### **1. Software for MacOS (Ground Station Setup)**
+### **1. On MacOS (Ground Station Setup)**
 
-#### **[QGroundControl](https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html)**  
-- **Purpose**: For configuring and controlling the Pixhawk 6X flight controller.
+#### **[QGroundControl](https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html)**
+- **Purpose**: Configure and control the Pixhawk 6X flight controller.
 - **Download**: [QGroundControl.dmg](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html)
 - **Installation**:
    ```bash
-   hdiutil attach ~/Downloads/QGroundControl.dmg
+   wget https://s3-us-west-2.amazonaws.com/qgroundcontrol/latest/QGroundControl.dmg
+   hdiutil attach QGroundControl.dmg
    cp -r /Volumes/QGroundControl/QGroundControl.app /Applications/
    ```
 
-#### **[Mission Planner](https://ardupilot.org/planner/docs/mission-planner-installation.html) (Alternative, Windows Only)**  
-- **Purpose**: For configuring autonomous vehicles.
-- **Note**: Not required for MacOS.
-
 ---
 
-### **2. Orange Pi 5 Pro Setup (Ubuntu OS)**
+### **2. On Orange Pi 5 Pro (Ubuntu 22.04)**
 
-#### **Step 1: Flash Ubuntu on Orange Pi 5 Pro**
+#### **Step 1: Flash Ubuntu**
 1. **Download Ubuntu Image**:  
    Visit the [Orange Pi 5 Pro Downloads](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
 2. **Flash Image**:  
@@ -88,98 +83,122 @@ Run the following commands in the Orange Pi terminal:
 sudo apt update && sudo apt upgrade -y
 
 # Install Python & Libraries
-sudo apt install python3-pip git -y
-pip3 install numpy opencv-python pyserial pyaudio tensorflow pymavlink
-
-# Install MAVLink tools
-sudo apt install ros-humble-mavros ros-humble-mavros-extras -y
-pip3 install PyYAML mavproxy dronekit
+sudo apt install -y python3-pip git v4l-utils libportaudio2
+pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
 ```
 
 ---
 
-### **3. Configure Sensors and Features**
+## 🚀 Sensor Configuration
 
-#### **1. reCamera Setup**
+### **1. reCamera Setup**
+
 ```bash
-# Test camera
-sudo apt install v4l-utils -y
+# Check camera
 v4l2-ctl --list-devices
 ```
-**Python Script**:
+
+**Python Test Script** (`camera_test.py`):
 ```python
 import cv2
 cap = cv2.VideoCapture(0)
 while True:
     ret, frame = cap.read()
     cv2.imshow("Frame", frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
 cv2.destroyAllWindows()
 ```
-
-#### **2. ReSpeaker USB Mic Array (Optional)**
+Run:
 ```bash
-# Install dependencies
-sudo apt install libportaudio2 -y
-pip3 install pyaudio
-```
-**Python Script**:
-```python
-import pyaudio
-p = pyaudio.PyAudio()
-for i in range(p.get_device_count()):
-    print(p.get_device_info_by_index(i))
+python3 camera_test.py
 ```
 
-#### **3. TFMini Plus LiDAR**
+---
+
+### **2. TFMini LiDAR**
+
 ```bash
 # Enable UART
-sudo raspi-config  # Enable serial port (disable login shell)
+sudo raspi-config  # Interface Options → Serial → Disable shell, enable hardware
+sudo reboot
 ```
-**Python Script**:
+
+**Python Test Script** (`lidar_test.py`):
 ```python
 import serial
 ser = serial.Serial('/dev/ttyS0', 115200)
 while True:
     data = ser.read(9)
     if data[0] == 0x59 and data[1] == 0x59:
-        distance = data[2] + data[3] * 256
-        print(f"Distance: {distance} cm")
+        print(f"Distance: {data[2] + data[3]*256} cm")
 ```
-
-#### **4. Pixhawk 6X MAVLink Connection**
-```bash
-# Install MAVProxy
-pip3 install mavproxy
-```
-**Connect to Pixhawk via UART**:
-```bash
-mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:127.0.0.1:14550
-```
-In **QGroundControl**:
-- Go to **Comm Links** → Add UDP Connection (Port: `14550`).
 
 ---
 
-## 🚀 Workflow for Advanced Features
+### **3. Pixhawk MAVLink**
 
-1. **Follow-Me Mode**:
-   - Use OpenCV for object tracking.
-   - Send MAVLink commands to the Pixhawk.
+```bash
+# Start MAVProxy bridge
+pip3 install mavproxy
+mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:127.0.0.1:14550
+```
 
-2. **Obstacle Avoidance**:
-   - Use TFMini LiDAR for real-time distance measurement.
-   - Adjust flight path using MAVLink.
+In **QGroundControl**:
+- Go to **Comm Links** → Add UDP Connection → Port: `14550`.
 
-3. **Gesture Control**:
-   - Train a CNN model for gesture recognition.
-   - Map gestures to drone commands.
+---
 
-4. **Voice Command (Optional)**:
-   - Use the SpeechRecognition library.
-   - Convert voice to MAVLink commands.
+## 🤖 AI Features Implementation
+
+### **1. Follow-Me Mode**
+```python
+# Object tracking (OpenCV + MAVLink)
+import cv2
+from pymavlink import mavutil
+
+drone = mavutil.mavlink_connection('udp:127.0.0.1:14550')
+cap = cv2.VideoCapture(0)
+tracker = cv2.TrackerCSRT_create()
+
+while True:
+    ret, frame = cap.read()
+    # Add tracking logic here
+    drone.mav.command_long_send(...)  # Send movement commands
+```
+
+---
+
+### **2. Obstacle Avoidance**
+```python
+# LiDAR + MAVLink
+import serial
+from pymavlink import mavutil
+
+lidar = serial.Serial('/dev/ttyS0', 115200)
+drone = mavutil.mavlink_connection('udp:127.0.0.1:14550')
+
+while True:
+    distance = read_lidar()  # Custom function
+    if distance < 100:  # 1m threshold
+        drone.mav.command_long_send(...)  # Evasive maneuver
+```
+
+---
+
+## 🔧 Debugging Tips
+
+1. **Camera not detected?**
+```bash
+ls /dev/video*  # Check device nodes
+sudo modprobe v4l2loopback
+```
+
+2. **MAVLink not connecting?**
+```bash
+sudo chmod 666 /dev/ttyAMA0  # Fix permissions
+```
 
 ---
 
@@ -193,14 +212,19 @@ In **QGroundControl**:
 
 ---
 
-## 🏆 Conclusion
+## 📜 License
 
-This guide provides a step-by-step process to build an AI-powered drone with **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command** capabilities using the Orange Pi 5 Pro and Pixhawk 6X.
+This project is licensed under the **MIT License** - free for personal and commercial use.
 
 ---
 
-## 🤝 Contribution & Contact
+## 📧 Contact
 
-Feel free to contribute to this project! Open a pull request or contact me for questions:
+Feel free to reach out for questions or collaborations:
+
 - **Email**: [sanjaykathula7@gmail.com](mailto:sanjaykathula7@gmail.com)
 - **GitHub**: [github.com/sanjayka1999](https://github.com/sanjayka1999)
+
+---
+
+🚀 **Let’s build the future of autonomous drones!**
