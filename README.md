@@ -19,25 +19,29 @@ A comprehensive engineering guide to building an advanced AI-powered autonomous 
 
 ## 🔧 Precision Assembly Guide
 
-### 🛠️ Mechanical Assembly
-1. **Frame Construction**:
-   - Use **M3 nylon screws** for vibration isolation.
-   - Apply **threadlocker** to all metal-fastened components.
-   - Balance props using a **DuBro Balancer**.
+### 🛠️ Steps to Assemble the Drone Frame and Components
+1. **Drone Frame Construction**:
+   - Use **M3 nylon screws** to assemble the drone frame and isolate vibrations.
+   - Apply **threadlocker** to secure all metal fasteners.
+   - Balance propellers using a **DuBro Balancer** for stable flight.
 
-   A detailed video tutorial for **mechanical assembly** is available [here](https://www.youtube.com/watch?v=8lVMiuphwg8&ab_channel=SanjayKathula).
+   A detailed video tutorial for **drone assembly** is available [here](https://www.youtube.com/watch?v=8lVMiuphwg8&ab_channel=SanjayKathula).
 
-2. **Component Placement**:
-   - Mount **Orange Pi** on **3mm silicone dampers** to reduce vibrations.
-   - Position **LiDAR** at a **15° downward tilt** for optimal obstacle detection.
-   - Secure **Pixhawk** with included vibration-absorbing foam.
+2. **Mounting Pixhawk 6X**:
+   - Place the Pixhawk 6X on the vibration-absorbing foam provided in its kit.
+   - Secure it using adhesive velcro or double-sided tape for easy removal during maintenance.
 
-3. **Vibration Dampening**:
-   - Use **rubber mounts** for all motors to minimize resonance.
+3. **Mounting TFMini Plus LiDAR**:
+   - Position the LiDAR sensor at a **15° downward tilt** for optimal obstacle detection.
+   - Secure it firmly using a custom mount or clip.
+
+4. **Mounting reCamera**:
+   - Attach the reCamera to the drone using a gimbal or custom mount for stable video capture.
 
 ---
 
-### 🔌 Electrical Wiring
+### 🔌 Electrical Wiring and Power Requirements
+
 ```mermaid
 graph LR
     subgraph Orange Pi
@@ -53,6 +57,8 @@ graph LR
 |------------------|-------------|-----------------|--------------------------------|
 | **Orange Pi**    | 5V ±5%      | 4A              | Requires filtered power        |
 | **Pixhawk**      | 4-6S LiPo   | 2.5A            | Direct battery connection      |
+| **TFMini Plus**  | 5V          | 0.1A            | Powered via UART               |
+| **reCamera**     | 5V ±5%      | 0.5A            | Powered via USB                |
 
 ---
 
@@ -261,9 +267,8 @@ def check_failsafe():
 
 ---
 
-## 📧 Contact
+## Made by
 - **Sanjay Kathula**
 - **Sai Kumar Gadde**
 
 ---
-🚀 **Let’s build the future of autonomous drones!**
