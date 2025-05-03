@@ -72,47 +72,29 @@ Below is the list of hardware components used in this project:
   2. Double-click the executable to launch the installer.
   3. The Windows installer creates 3 shortcuts: **QGroundControl**, **GPU Compatibility Mode**, and **GPU Safe Mode**. Use the first shortcut unless you experience startup or video rendering issues. For more information, see **Troubleshooting QGC Setup > Windows: UI Rendering/Video Driver Issues**.
 
-### **2. [Mission Planner](https://ardupilot.org/planner/docs/mission-planner-installation.html) (Works only on Windows)
-Mission Planner Overview¶
-Mission Planner is a full-featured ground station application for the ArduPilot open source autopilot project. This page contains information on the background of Mission Planner and the organization of this site.
+---
 
-What is Mission Planner¶
-../_images/mission_planner_flight_data.jpg
-Mission Planner is a ground control station for Plane, Copter and Rover. It is compatible with Windows only. Mission Planner can be used as a configuration utility or as a dynamic control supplement for your autonomous vehicle. Here are just a few things you can do with Mission Planner:
+### **2. Mission Planner (Windows Only)**
+#### **[Mission Planner Installation](https://ardupilot.org/planner/docs/mission-planner-installation.html)**
+- **Overview**:  
+Mission Planner is a full-featured ground station application for the ArduPilot open-source autopilot project. It is compatible with Windows only and can be used for configuring and controlling autonomous vehicles.
 
-Load the firmware (the software) into the autopilot board (i.e. Pixhawk series) that controls your vehicle.
-
-Setup, configure, and tune your vehicle for optimum performance.
-
-Plan, save and load autonomous missions into you autopilot with simple point-and-click way-point entry on Google or other maps.
-
-Download and analyze mission logs created by your autopilot.
-
-Interface with a PC flight simulator to create a full hardware-in-the-loop UAV simulator.
-
-With appropriate telemetry hardware you can:
-
-Monitor your vehicle’s status while in operation.
-
-Record telemetry logs which contain much more information about the on-board autopilot logs.
-
-View and analyze the telemetry logs.
-
-Operate your vehicle in FPV (first person view)
-
-All of these and many more features are covered here.
-
-
+- **Features**:
+  - Load firmware into the autopilot board (e.g., Pixhawk series).
+  - Setup, configure, and tune your vehicle for optimum performance.
+  - Plan, save, and load autonomous missions with point-and-click waypoint entry.
+  - Download and analyze mission logs created by your autopilot.
+  - Monitor vehicle status in real time with appropriate telemetry hardware.
 
 ---
 
-### **2. Step 1: Operating System Installation**
+### **3. Step 1: Operating System Installation**
 - Install a compatible Linux distribution like **Ubuntu** or **Armbian** on the Orange Pi 5.  
   Refer to the official [Orange Pi 5 Pro Support Page](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
 
 ---
 
-### **3. Step 2: Install Software Dependencies**
+### **4. Step 2: Install Software Dependencies**
 1. **Update the System**:
    ```bash
    sudo apt update && sudo apt upgrade
