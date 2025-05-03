@@ -1,8 +1,8 @@
 # SKYMASTER
 Advanced Drone Building Guide 
-# Advanced Drone Building Using Orange Pi 5
+# Advanced Drone Building Using AI
 
-This repository contains all the necessary resources, code, and guidelines to build an advanced drone with features like **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command**. The project leverages cutting-edge technologies, including the **Orange Pi 5**, **reCamera**, **ReSpeaker USB Mic Array**, **TFMini Plus LiDAR**, and **Pixhawk 6X**.
+This repository contains all the necessary resources, code, and guidelines to build an advanced drone with features like **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command**. The project leverages cutting-edge technologies, including the **Orange Pi 5 pro**, **reCamera**, **ReSpeaker USB Mic Array**, **TFMini Plus LiDAR**, and **Pixhawk 6X**.
 
 ---
 
@@ -12,7 +12,7 @@ The primary objective of this project is to design and implement a fully functio
 1. **Follow-Me**: Automatically follow a target based on visual data.
 2. **Obstacle Avoidance**: Detect and avoid obstacles in real time.
 3. **Gesture Control**: Respond to specific hand gestures for control.
-4. **Voice Command**: Execute commands based on voice inputs.
+4. **Voice Command**: Execute commands based on voice inputs (optional).
 
 ---
 
@@ -20,12 +20,11 @@ The primary objective of this project is to design and implement a fully functio
 
 Below is the list of hardware components used in this project:
 
-1. **Orange Pi 5**: The onboard computer for running AI models and processing sensor data.
-2. **reCamera**: Captures video for follow-me and gesture control features.
-3. **ReSpeaker USB Mic Array**: Captures voice commands for voice-based control.
-4. **TFMini Plus LiDAR**: Measures distance and enables obstacle avoidance.
-5. **Pixhawk 6X**: Handles flight control and navigation.
-6. **Drone Frame, Motors, ESCs, Propellers, and Battery**: Physical structure and propulsion system for the drone.
+1. **[Orange Pi 5 pro]([url](https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G?tag=usdeshoppin04-20&th=1))**: The onboard computer for running AI models and processing sensor data.
+2. **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**: Captures video for follow-me and gesture control features.
+3. **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)**: Captures voice commands for voice-based control.
+4. **[TFMini Plus LiDAR](https://www.amazon.com/Stemedu-0-1m-12m-Distance-Detection-Waterproof/dp/B07L8B2FVK)**: Measures distance and enables obstacle avoidance.
+5. **[Pixhawk 6X Flight Controller Kit](https://holybro.com/collections/x500-kits/products/px4-development-kit-x500-v2?variant=43018371629245)**: Handles flight control and navigation.
 
 ---
 
