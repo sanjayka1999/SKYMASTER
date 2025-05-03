@@ -12,8 +12,8 @@ A comprehensive engineering guide to building an advanced AI-powered autonomous 
 | **[Orange Pi 5 Pro](https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G)** | Rockchip RK3588, 8GB RAM                   | [Official Store](https://www.orangepi.org)       | [Datasheet](https://www.rock-chips.com/a/en/products/RK35_Series/RK3588/) |
 | **[Pixhawk 6X](https://holybro.com/collections/x500-kits/products/px4-development-kit-x500-v2)** | STM32H743, 2MB Flash                       | [Holybro](https://holybro.com)                   | [PX6X Manual](https://docs.px4.io/master/en/flight_controller/pixhawk6x.html) |
 | **[TFMini Plus](https://www.amazon.com/Stemedu-0-1m-12m-Distance-Detection-Waterproof/dp/B07L8B2FVK)** | 12m range, 100Hz                          | [Benewake](https://www.benewake.com)             | [Protocol Spec](https://www.benewake.com/resource/TFmini%20Plus%20Product%20Manual.pdf) |
-| **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**         | 1080p Video, USB/MIPI CSI                 | [Official Store](https://www.seeedstudio.com)    | N/A                                               |
-| **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)** | 360° Voice Capture, USB                   | [Seeed Studio](https://www.seeedstudio.com)      | N/A                                               |
+| **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**         | 1080p Video, USB/MIPI CSI                 | [Official Store](https://www.seeedstudio.com)    | [Getting Started Guide](https://wiki.seeedstudio.com/recamera_getting_started/) |
+| **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)** | 360° Voice Capture, USB                   | [Seeed Studio](https://www.seeedstudio.com)      | [Features & Documentation](https://wiki.seeedstudio.com/ReSpeaker-USB-Mic-Array/#features) |
 
 ---
 
@@ -53,7 +53,6 @@ graph LR
 |------------------|-------------|-----------------|--------------------------------|
 | **Orange Pi**    | 5V ±5%      | 4A              | Requires filtered power        |
 | **Pixhawk**      | 4-6S LiPo   | 2.5A            | Direct battery connection      |
-| **Servos**       | 5V          | 3A total        | Separate BEC recommended       |
 
 ---
 
@@ -263,8 +262,8 @@ def check_failsafe():
 ---
 
 ## 📧 Contact
-- **Project Lead**: [Sanjay Kathula](mailto:sanjaykathula7@gmail.com)
-- **Technical Advisor**: Dr. A. Robotics (MIT)
-- **Hardware Consultant**: J. Aerodesign (Stanford)
+- **Sanjay Kathula**
+- **Sai Kumar Gadde**
 
 ---
+🚀 **Let’s build the future of autonomous drones!**
