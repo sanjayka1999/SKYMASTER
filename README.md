@@ -15,6 +15,8 @@ This project transforms an **Orange Pi 5 Pro** into the brain of an advanced AI-
 
 With this guide, you'll learn how to set up the hardware, configure the software, and implement AI features to create a robust autonomous drone.
 
+This guide is divided into two sections to accommodate both **MacOS** and **Windows** users.
+
 ---
 
 ## 📂 Key Hardware Components
@@ -52,9 +54,10 @@ With this guide, you'll learn how to set up the hardware, configure the software
 
 ## 💻 Software Installation
 
-### **1. On MacOS (Ground Station Setup)**
+### For MacOS Users
 
-#### **[QGroundControl](https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html)**
+#### **1. Ground Station Setup with QGroundControl**
+
 - **Purpose**: Configure and control the Pixhawk 6X flight controller.
 - **Download**: [QGroundControl.dmg](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html)
 - **Installation**:
@@ -66,7 +69,22 @@ With this guide, you'll learn how to set up the hardware, configure the software
 
 ---
 
-### **2. On Orange Pi 5 Pro (Ubuntu 22.04)**
+### For Windows Users
+
+#### **1. Ground Station Setup with Mission Planner**
+
+- **Purpose**: A Windows-compatible flight control software for Pixhawk.
+- **Download**: [Mission Planner](https://firmware.ardupilot.org/Tools/MissionPlanner/)
+- **Installation**:
+  1. Download the `.exe` file.
+  2. Run the installer with administrator privileges.
+  3. Once installed, configure Mission Planner:
+     - Select **COM Port** (check in Device Manager).
+     - Set the **baud rate** to `57600`.
+
+---
+
+### **2. Orange Pi 5 Pro Setup (Ubuntu 22.04)**
 
 #### **Step 1: Flash Ubuntu**
 1. **Download Ubuntu Image**:  
@@ -142,6 +160,7 @@ while True:
 
 ### **3. Pixhawk MAVLink**
 
+#### For MacOS:
 ```bash
 # Start MAVProxy bridge
 pip3 install mavproxy
@@ -150,6 +169,16 @@ mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:127.0.0.1:14550
 
 In **QGroundControl**:
 - Go to **Comm Links** → Add UDP Connection → Port: `14550`.
+
+#### For Windows:
+```bash
+# Start MAVProxy bridge
+mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:192.168.1.100:14550
+```
+Replace `192.168.1.100` with your Windows PC's IP address.
+
+In **Mission Planner**:
+- Add a UDP connection on port `14550`.
 
 ---
 
