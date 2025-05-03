@@ -34,7 +34,7 @@ Below is the list of hardware components used in this project:
 1. **reCamera**:
    - Connect to the **USB 3.0** or **MIPI CSI** interface of the Orange Pi 5.
    - Mount the camera on the drone frame with an unobstructed view of the target.
-2. **ReSpeaker USB Mic Array**:
+2. **ReSpeaker USB Mic Array(Optional for Voice Commands feature)**:
    - Connect to the **USB 3.0** port of the Orange Pi 5.
    - Mount it in a position that optimizes capture of voice commands.
 3. **TFMini Plus LiDAR**:
@@ -44,9 +44,9 @@ Below is the list of hardware components used in this project:
    - Connect via **UART** or **I2C** for communication.
    - Use a telemetry radio (e.g., SiK Radio) for wireless communication.
 5. **Power Supply**:
-   - Use a 5V power module connected to the drone's battery to supply power to the Orange Pi 5.
+   - Use a 5V power module soldered to the Power Distribution Board(PDB) to supply power to the Orange Pi 5 pro.
 
-### **Pixhawk 6X Connections**
+### **[Pixhawk 6X Connections](https://www.youtube.com/watch?v=8lVMiuphwg8&ab_channel=SanjayKathula)**
 1. **Motors and ESCs**: Connect motors and ESCs to the Pixhawk 6X motor outputs.
 2. **GPS Module**: Connect a GPS module (e.g., u-blox M8N) to the Pixhawk for navigation.
 3. **Telemetry Radio**: Connect a telemetry radio for communication with the ground station.
