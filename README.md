@@ -60,17 +60,11 @@ Below is the list of hardware components used in this project:
 - **System Requirements**:  
   QGC should run well on any modern computer or mobile device. Performance will depend on the system environment, 3rd party applications, and available system resources. More capable hardware will provide a better experience. A computer with at least 8GB RAM, an SSD, Nvidia or AMD graphics, and an i5 or better CPU will be suitable for most applications.
 
-- **Installation on macOS**:
-  1. Download `QGroundControl.dmg`.
-  2. Double-click the `.dmg` file to mount it, then drag the QGroundControl application to your Application folder.
-  3. To open the QGC app for the first time:
-     - Right-click the QGC app icon, select **Open** from the menu. You will only be presented with an option to Cancel. Select **Cancel**.
-     - Right-click the QGC app icon again, select **Open** from the menu. This time you will be presented with the option to **Open**.
-
-- **Installation on Windows**:
-  1. Download `QGroundControl-installer.exe`.
-  2. Double-click the executable to launch the installer.
-  3. The Windows installer creates 3 shortcuts: **QGroundControl**, **GPU Compatibility Mode**, and **GPU Safe Mode**. Use the first shortcut unless you experience startup or video rendering issues. For more information, see **Troubleshooting QGC Setup > Windows: UI Rendering/Video Driver Issues**.
+- **Download and Installation**:
+  - macOS:  
+    Download `QGroundControl.dmg` from [QGroundControl Downloads](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html) and follow the installation steps.
+  - Windows:  
+    Download `QGroundControl-installer.exe` and follow the steps for installation.
 
 ---
 
@@ -79,22 +73,21 @@ Below is the list of hardware components used in this project:
 - **Overview**:  
 Mission Planner is a full-featured ground station application for the ArduPilot open-source autopilot project. It is compatible with Windows only and can be used for configuring and controlling autonomous vehicles.
 
-- **Features**:
-  - Load firmware into the autopilot board (e.g., Pixhawk series).
-  - Setup, configure, and tune your vehicle for optimum performance.
-  - Plan, save, and load autonomous missions with point-and-click waypoint entry.
-  - Download and analyze mission logs created by your autopilot.
-  - Monitor vehicle status in real time with appropriate telemetry hardware.
+- **Download and Installation**:
+  Visit the [Mission Planner Downloads](https://ardupilot.org/planner/docs/mission-planner-installation.html) page and download the latest version for Windows.
 
 ---
 
 ### **3. Step 1: Operating System Installation**
-- Install a compatible Linux distribution like **Ubuntu** or **Armbian** on the Orange Pi 5.  
-  Refer to the official [Orange Pi 5 Pro Support Page](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
+- **Download**:  
+  Visit the [Orange Pi 5 Pro Support Page](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html) to download a compatible Linux distribution like **Ubuntu** or **Armbian**.  
+- **Installation**:  
+  Follow the official instructions provided on the page.
 
 ---
 
 ### **4. Step 2: Install Software Dependencies**
+
 1. **Update the System**:
    ```bash
    sudo apt update && sudo apt upgrade
@@ -104,13 +97,15 @@ Mission Planner is a full-featured ground station application for the ArduPilot 
    sudo apt install python3-pip
    pip3 install numpy opencv-python pyserial pyaudio tensorflow pymavlink
    ```
+   - **Download Source**: Dependencies are installed via `pip`. Ensure Python is installed on your system. If missing, download it from [Python.org](https://www.python.org/).
+
 3. **Install AI Frameworks**:
    ```bash
    pip3 install tensorflow
    ```
+   - **Download Source**: TensorFlow is installed via `pip`. For additional installation methods, refer to the [TensorFlow Installation Page](https://www.tensorflow.org/install).
 
 ---
-
 ## 🧑‍💻 Configuration for Sensors and Features
 
 ### **1. reCamera**
