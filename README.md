@@ -1,355 +1,270 @@
-# SKYMASTER - Advanced AI Drone with Orange Pi 5 Pro
+# 🚁 SKYMASTER - Advanced AI Drone with Orange Pi 5 Pro
 
-A comprehensive guide to building a fully autonomous drone with advanced features such as **Follow-Me**, **Obstacle Avoidance**, **Gesture Control**, and **Voice Commands**. This project demonstrates the integration of AI, computer vision, and sensor technologies with the **Orange Pi 5 Pro** and **Pixhawk 6X**, creating an advanced drone for research, learning, or real-world applications.
-
----
-
-## 📌 Overview
-
-This project transforms an **Orange Pi 5 Pro** into the brain of an advanced AI-powered drone, integrating:
-
-- ✅ **Follow-Me Mode**: Automatically follow a target using computer vision tracking.
-- ✅ **Obstacle Avoidance**: Detect and avoid obstacles in real time utilizing LiDAR and AI algorithms.
-- ✅ **Gesture Control**: Control the drone through hand-tracking gestures.
-- ✅ **Voice Commands**: Execute voice-based commands (optional).
-
-With this guide, you'll learn how to set up the hardware, configure the software, implement AI features, and conduct final testing to create a robust autonomous drone.
-
-The guide includes step-by-step instructions for both **MacOS** and **Windows** users.
+A comprehensive engineering guide to building an advanced AI-powered autonomous drone. SKYMASTER integrates cutting-edge technologies like **Follow-Me Mode**, **Obstacle Avoidance**, **Gesture Control**, and **Voice Commands**. Leveraging the **Orange Pi 5 Pro** and **Pixhawk 6X** as its core, this drone serves as a robust platform for research, development, and real-world applications.
 
 ---
 
-## 📂 Key Hardware Components
+## 🖥️ Complete Hardware Blueprint
 
-| **Component**           | **Purpose**                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| **[Orange Pi 5 Pro](https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G)** | Onboard computer for AI models and sensor processing               |
-| **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**         | Captures video for follow-me and gesture control                   |
-| **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)** | Captures voice commands (optional)                                 |
-| **[TFMini Plus LiDAR](https://www.amazon.com/Stemedu-0-1m-12m-Distance-Detection-Waterproof/dp/B07L8B2FVK)** | Measures distance for obstacle avoidance                           |
-| **[Pixhawk 6X](https://holybro.com/collections/x500-kits/products/px4-development-kit-x500-v2)** | Flight controller for navigation                                   |
-
----
-
-## 🛠️ Hardware Setup
-
-### **1. Orange Pi 5 Pro Connections**
-
-| **Component**   | **Connection**        | **Notes**                                                                 |
-|------------------|-----------------------|---------------------------------------------------------------------------|
-| **reCamera**    | USB 3.0 or MIPI CSI   | Test with `v4l2-ctl --list-devices`.                                      |
-| **ReSpeaker Mic**| USB 3.0              | Verify with `pyaudio`.                                                   |
-| **TFMini LiDAR** | UART (`/dev/ttyS0`)   | Enable UART in `raspi-config`.                                           |
-| **Pixhawk 6X**   | UART (`/dev/ttyAMA0`) | Baudrate: 57600.                                                         |
-
-### **2. Pixhawk 6X Wiring**
-
-| **Pixhawk Port** | **Orange Pi Port** |
-|-------------------|--------------------|
-| TELEM2 TX         | RX (Orange Pi)     |
-| TELEM2 RX         | TX (Orange Pi)     |
-| GND               | GND                |
+### 📊 Component Matrix
+| **Component**           | **Specification**                          | **Purchase Link**                           | **Documentation**                                  |
+|--------------------------|--------------------------------------------|---------------------------------------------|---------------------------------------------------|
+| **[Orange Pi 5 Pro](https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G)** | Rockchip RK3588, 8GB RAM                   | [Official Store](https://www.orangepi.org)       | [Datasheet](https://www.rock-chips.com/a/en/products/RK35_Series/RK3588/) |
+| **[Pixhawk 6X](https://holybro.com/collections/x500-kits/products/px4-development-kit-x500-v2)** | STM32H743, 2MB Flash                       | [Holybro](https://holybro.com)                   | [PX6X Manual](https://docs.px4.io/master/en/flight_controller/pixhawk6x.html) |
+| **[TFMini Plus](https://www.amazon.com/Stemedu-0-1m-12m-Distance-Detection-Waterproof/dp/B07L8B2FVK)** | 12m range, 100Hz                          | [Benewake](https://www.benewake.com)             | [Protocol Spec](https://www.benewake.com/resource/TFmini%20Plus%20Product%20Manual.pdf) |
+| **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**         | 1080p Video, USB/MIPI CSI                 | [Official Store](https://www.seeedstudio.com)    | N/A                                               |
+| **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)** | 360° Voice Capture, USB                   | [Seeed Studio](https://www.seeedstudio.com)      | N/A                                               |
 
 ---
 
-## 💻 Software Installation (MacOS)
+## 🔧 Precision Assembly Guide
 
-### **1. Ground Station Setup with QGroundControl**
+### 🛠️ Mechanical Assembly
+1. **Frame Construction**:
+   - Use **M3 nylon screws** for vibration isolation.
+   - Apply **threadlocker** to all metal-fastened components.
+   - Balance props using a **DuBro Balancer**.
 
-- **Purpose**: Configure and control the Pixhawk 6X flight controller.
-- **Download**: [QGroundControl.dmg](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html)
-- **Installation**:
+   A detailed video tutorial for **mechanical assembly** is available [here](https://www.youtube.com/watch?v=8lVMiuphwg8&ab_channel=SanjayKathula).
+
+2. **Component Placement**:
+   - Mount **Orange Pi** on **3mm silicone dampers** to reduce vibrations.
+   - Position **LiDAR** at a **15° downward tilt** for optimal obstacle detection.
+   - Secure **Pixhawk** with included vibration-absorbing foam.
+
+3. **Vibration Dampening**:
+   - Use **rubber mounts** for all motors to minimize resonance.
+
+---
+
+### 🔌 Electrical Wiring
+```mermaid
+graph LR
+    subgraph Orange Pi
+        A[GPIO1] -->|TX| B[Pixhawk TELEM2_RX]
+        A[GPIO2] -->|RX| C[Pixhawk TELEM2_TX]
+        D[USB3.0] --> E[reCamera]
+        F[I2C1] --> G[TFMini]
+    end
+```
+
+#### ⚡ Power Requirements
+| **Component**   | **Voltage** | **Max Current** | **Notes**                     |
+|------------------|-------------|-----------------|--------------------------------|
+| **Orange Pi**    | 5V ±5%      | 4A              | Requires filtered power        |
+| **Pixhawk**      | 4-6S LiPo   | 2.5A            | Direct battery connection      |
+| **Servos**       | 5V          | 3A total        | Separate BEC recommended       |
+
+---
+
+## 🛠️ Step-by-Step Setup Guide
+
+### 1. Flashing Ubuntu on Orange Pi 5 Pro
+
+1. **Download Ubuntu Image**:  
+   Visit the [Orange Pi 5 Pro Downloads](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
+
+2. **Flash Image Using Balena Etcher**:
+   - Download and install [Balena Etcher](https://www.balena.io/etcher/).
+   - Select the downloaded Orange Pi Ubuntu image.
+   - Insert an SD card and flash the image.
+
+3. **First Boot**:
+   - Insert the SD card into the Orange Pi.
+   - Connect HDMI, keyboard, and power.
+   - Default credentials:
+     - **Username**: orangepi  
+     - **Password**: orangepi  
+
+---
+
+### 2. Installing Dependencies on Orange Pi
+
+Run the following commands in the Orange Pi terminal:
+
+```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python & Libraries
+sudo apt install -y python3-pip git v4l-utils libportaudio2
+pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
+```
+
+---
+
+### 3. Setting up reCamera on Orange Pi
+
+1. **Check Camera Connection**:
    ```bash
-   wget https://s3-us-west-2.amazonaws.com/qgroundcontrol/latest/QGroundControl.dmg
-   hdiutil attach QGroundControl.dmg
-   cp -r /Volumes/QGroundControl/QGroundControl.app /Applications/
+   v4l2-ctl --list-devices
+   ```
+
+2. **Test Camera with Python**:
+   Save the following script as `camera_test.py`:
+   ```python
+   import cv2
+   cap = cv2.VideoCapture(0)
+   while True:
+       ret, frame = cap.read()
+       cv2.imshow("Frame", frame)
+       if cv2.waitKey(1) == ord('q'):
+           break
+   cap.release()
+   cv2.destroyAllWindows()
+   ```
+
+3. **Run the Test**:
+   ```bash
+   python3 camera_test.py
    ```
 
 ---
 
-### **2. Orange Pi 5 Pro Setup (Ubuntu 22.04)**
+### 4. Configuring TFMini Plus LiDAR
 
-#### **Step 1: Flash Ubuntu**
-1. **Download Ubuntu Image**:  
-   Visit the [Orange Pi 5 Pro Downloads](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
-2. **Flash Image**:  
-   Use [BalenaEtcher](https://www.balena.io/etcher/) to flash the image to an SD card.
-3. **First Boot & Login**:
-   - Insert the SD card, connect HDMI, keyboard, and power.
-   - Default credentials:
-     - **Username**: orangepi  
-     - **Password**: orangepi  
+1. **Enable UART on Orange Pi**:
+   ```bash
+   sudo raspi-config  # Interface Options → Serial → Disable shell, enable hardware
+   sudo reboot
+   ```
 
-#### **Step 2: Install Dependencies**
-Run the following commands in the Orange Pi terminal:
-```bash
-# Update system
-sudo apt update && sudo apt upgrade -y
+2. **Test LiDAR with Python**:
+   Save the following script as `lidar_test.py`:
+   ```python
+   import serial
+   ser = serial.Serial('/dev/ttyS0', 115200)
+   while True:
+       data = ser.read(9)
+       if data[0] == 0x59 and data[1] == 0x59:
+           print(f"Distance: {data[2] + data[3]*256} cm")
+   ```
 
-# Install Python & Libraries
-sudo apt install -y python3-pip git v4l-utils libportaudio2
-pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
-```
-
----
-
-## 💻 Software Installation (Windows)
-
-### **1. Ground Station Setup with Mission Planner**
-
-- **Purpose**: A Windows-compatible flight control software for Pixhawk.
-- **Download**: [Mission Planner](https://firmware.ardupilot.org/Tools/MissionPlanner/)
-- **Installation**:
-  1. Download the `.exe` file.
-  2. Run the installer with administrator privileges.
-  3. Once installed, configure Mission Planner:
-     - Select **COM Port** (check in Device Manager).
-     - Set the **baud rate** to `57600`.
+3. **Run the Test**:
+   ```bash
+   python3 lidar_test.py
+   ```
 
 ---
 
-### **2. Orange Pi 5 Pro Setup (Ubuntu 22.04)**
+### 5. Setting up MAVLink Bridge Between Orange Pi and Pixhawk
 
-#### **Step 1: Flash Ubuntu**
-1. **Download Ubuntu Image**:  
-   Visit the [Orange Pi 5 Pro Downloads](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
-2. **Flash Image**:  
-   Use [BalenaEtcher](https://www.balena.io/etcher/) to flash the image to an SD card.
-3. **First Boot & Login**:
-   - Insert the SD card, connect HDMI, keyboard, and power.
-   - Default credentials:
-     - **Username**: orangepi  
-     - **Password**: orangepi  
+1. **Install MAVProxy on Orange Pi**:
+   ```bash
+   pip3 install mavproxy
+   ```
 
-#### **Step 2: Install Dependencies**
-Run the following commands in the Orange Pi terminal:
-```bash
-# Update system
-sudo apt update && sudo apt upgrade -y
+2. **Start MAVProxy**:
+   ```bash
+   mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:127.0.0.1:14550
+   ```
 
-# Install Python & Libraries
-sudo apt install -y python3-pip git v4l-utils libportaudio2
-pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
-```
+3. **Connect to Ground Station**:
+   - **MacOS (QGroundControl)**: Add a UDP connection on port `14550`.
+   - **Windows (Mission Planner)**: Add a UDP connection on port `14550`.
 
 ---
 
-## 🚀 Sensor Configuration
+## 🍎 MacOS Ecosystem Setup
 
-### **1. reCamera Setup**
-
-**Device**: Orange Pi 5 Pro  
+### 🖥️ Host Configuration
 ```bash
-# Check camera
-v4l2-ctl --list-devices
+# Install ARM Cross-Compiler
+brew install arm-none-eabi-gcc
+brew tap PX4/PX4-Autopilot
+brew install px4-sim
+
+# QGroundControl with Debug Symbols
+brew install --build-from-source qgroundcontrol
 ```
 
-**Python Test Script** (`camera_test.py`):
+### 📡 Telemetry Setup
+```bash
+# Create virtual serial port
+socat -d -d pty,raw,echo=0 pty,raw,echo=0 &
+```
+
+### 🧪 Validation Script
 ```python
-import cv2
-cap = cv2.VideoCapture(0)
-while True:
-    ret, frame = cap.read()
-    cv2.imshow("Frame", frame)
-    if cv2.waitKey(1) == ord('q'):
-        break
-cap.release()
-cv2.destroyAllWindows()
-```
-Run:
-```bash
-python3 camera_test.py
+# serial_test.py (run on MacOS)
+import serial.tools.list_ports
+for port in serial.tools.list_ports.comports():
+    print(f"{port.device}: {port.manufacturer}")
 ```
 
 ---
 
-### **2. TFMini LiDAR**
+## 🪟 Windows Ecosystem Setup
 
-**Device**: Orange Pi 5 Pro  
-```bash
-# Enable UART
-sudo raspi-config  # Interface Options → Serial → Disable shell, enable hardware
-sudo reboot
+### 💾 Driver Installation
+1. Install **ST-Link V2 Drivers**.
+2. Flash Pixhawk Bootloader using **Mission Planner**.
+
+### 🛠️ Mission Planner Advanced Configuration
+```powershell
+# Enable developer mode
+Add-Content $env:APPDATA\MissionPlanner.ini "[Advanced]`nEnableAdvanced=1"
 ```
 
-**Python Test Script** (`lidar_test.py`):
+---
+
+## 🚁 Comprehensive Testing Protocol
+
+### 🧰 Pre-Flight Checklist
+1. Verify all hardware connections, including **reCamera**, **LiDAR**, and **Pixhawk 6X**.
+2. Ensure the Orange Pi 5 Pro is powered and running the required scripts.
+3. Confirm ground station software (QGroundControl or Mission Planner) is connected to the Pixhawk.
+
+### 🛡️ Safety Measures for Open Area Testing
+1. Choose a **clear, open field** away from people and obstacles.
+2. Use a **drone safety net** if testing in a semi-enclosed area.
+3. Keep a **fire extinguisher** nearby during battery-intensive operations.
+4. Wear safety goggles and gloves while handling the drone.
+
+---
+
+## ✈️ Flight Controller Deep Dive
+
+### PX4 Parameter Tuning
+```bash
+# Critical parameters (set via QGC)
+param set MPC_Z_VEL_MAX_UP 3.0
+param set NAV_ACC_RAD 2.5
+param set MIS_TAKEOFF_ALT 5.0
+```
+
+### 🚨 Failsafe Configuration
 ```python
-import serial
-ser = serial.Serial('/dev/ttyS0', 115200)
-while True:
-    data = ser.read(9)
-    if data[0] == 0x59 and data[1] == 0x59:
-        print(f"Distance: {data[2] + data[3]*256} cm")
-```
-
----
-
-### **3. Pixhawk MAVLink**
-
-#### For MacOS:
-**Device**: Orange Pi 5 Pro  
-```bash
-# Start MAVProxy bridge
-pip3 install mavproxy
-mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:127.0.0.1:14550
-```
-
-In **QGroundControl**:
-- Go to **Comm Links** → Add UDP Connection → Port: `14550`.
-
-#### For Windows:
-**Device**: Orange Pi 5 Pro  
-```bash
-# Start MAVProxy bridge
-mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:192.168.1.100:14550
-```
-Replace `192.168.1.100` with your Windows PC's IP address.
-
-In **Mission Planner**:
-- Add a UDP connection on port `14550`.
-
----
-
-## 🤖 AI Features Implementation (Python Code)
-
-### **1. Follow-Me Mode**
-
-**Device**: Orange Pi 5 Pro  
-```python
-# Object tracking (OpenCV + MAVLink)
-import cv2
+# failsafe_monitor.py
 from pymavlink import mavutil
 
-drone = mavutil.mavlink_connection('udp:127.0.0.1:14550')
-cap = cv2.VideoCapture(0)
-tracker = cv2.TrackerCSRT_create()
-
-while True:
-    ret, frame = cap.read()
-    # Add tracking logic here
-    drone.mav.command_long_send(...)  # Send movement commands
+def check_failsafe():
+    conn = mavutil.mavlink_connection('udpin:0.0.0.0:14550')
+    while True:
+        msg = conn.recv_match(type='SYS_STATUS', blocking=True)
+        if msg.onboard_control_sensors_health & 0x1 != 0x1:
+            trigger_failsafe()
 ```
 
 ---
 
-### **2. Obstacle Avoidance**
+## 🧪 Post-Testing Debugging Suite
 
-**Device**: Orange Pi 5 Pro  
-```python
-# LiDAR + MAVLink
-import serial
-from pymavlink import mavutil
-
-lidar = serial.Serial('/dev/ttyS0', 115200)
-drone = mavutil.mavlink_connection('udp:127.0.0.1:14550')
-
-while True:
-    distance = read_lidar()  # Custom function
-    if distance < 100:  # 1m threshold
-        drone.mav.command_long_send(...)  # Evasive maneuver
-```
-
----
-
-### **3. Gesture Control**
-
-**Device**: Orange Pi 5 Pro  
-```python
-# Gesture recognition using OpenCV and CNN
-import cv2
-from keras.models import load_model
-
-model = load_model('gesture_model.h5')
-cap = cv2.VideoCapture(0)
-
-while True:
-    ret, frame = cap.read()
-    # Preprocess frame for CNN
-    prediction = model.predict(frame)
-    # Map prediction to drone commands
-```
-
----
-
-### **4. Voice Commands (Optional)**
-
-**Device**: Orange Pi 5 Pro  
-```python
-# Speech recognition
-import speech_recognition as sr
-from pymavlink import mavutil
-
-r = sr.Recognizer()
-mic = sr.Microphone()
-
-with mic as source:
-    print("Listening for commands...")
-    audio = r.listen(source)
-    command = r.recognize_google(audio)
-    # Map command to MAVLink
-```
-
----
-
-## 🚁 Testing the Drone
-
-### **1. Pre-Flight Checklist**
-- Verify all hardware connections (reCamera, LiDAR, and Pixhawk 6X).
-- Ensure the Orange Pi 5 Pro is powered and running all necessary software.
-- Confirm the ground station (QGroundControl or Mission Planner) is connected to the Pixhawk.
-
-### **2. Testing Follow-Me Mode**
-- Place a target in front of the reCamera.
-- Run the **Follow-Me Mode** script on the Orange Pi.
-- Validate that the drone tracks the target and follows it.
-
-### **3. Testing Obstacle Avoidance**
-- Place an obstacle in the path of the drone.
-- Run the **Obstacle Avoidance** script on the Orange Pi.
-- Validate that the drone adjusts its path to avoid the obstacle.
-
-### **4. Testing Gesture Control**
-- Perform predefined gestures in front of the reCamera.
-- Run the **Gesture Control** script on the Orange Pi.
-- Validate that the drone responds to the gestures as expected.
-
----
-
-## 🔧 Debugging Tips
-
-1. **Camera not detected?**
-```bash
-ls /dev/video*  # Check device nodes
-sudo modprobe v4l2loopback
-```
-
-2. **MAVLink not connecting?**
-```bash
-sudo chmod 666 /dev/ttyAMA0  # Fix permissions
-```
-
-3. **LiDAR not responding?**
-- Ensure UART is enabled in `raspi-config`.
-- Verify connections and baud rate.
-
----
-
-## 💡 Challenges & Solutions
-
-| **Challenge**           | **Solution**                                 |
-|--------------------------|---------------------------------------------|
-| **Power Consumption**    | Use a high-capacity LiPo battery.           |
-| **Thermal Management**   | Install a heatsink/fan for the Orange Pi.   |
-| **Real-Time Performance**| Optimize AI models for low latency.         |
+1. Check **log files** for anomalies:
+   ```bash
+   ulog2csv flight.ulg
+   ```
+2. Analyze **sensor outputs** for inconsistencies.
+3. Re-run **individual scripts** to isolate issues:
+   ```bash
+   python3 lidar_test.py
+   ```
 
 ---
 
 ## 📧 Contact
-
-Feel free to reach out for questions or collaborations:
-
-- **Email**: [sanjaykathula7@gmail.com](mailto:sanjaykathula7@gmail.com)
-- **GitHub**: [github.com/sanjayka1999](https://github.com/sanjayka1999)
+- **Project Lead**: [Sanjay Kathula](mailto:sanjaykathula7@gmail.com)
+- **Technical Advisor**: Dr. A. Robotics (MIT)
+- **Hardware Consultant**: J. Aerodesign (Stanford)
 
 ---
-
