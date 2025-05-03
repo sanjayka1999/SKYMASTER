@@ -184,7 +184,7 @@ master.mav.command_long_send(
 
 ## 🏆 Conclusion
 
-By following this guide, you’ll successfully build a feature-rich drone capable of **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command** functionalities. This project showcases the integration of hardware and software in a real-world application, making it an excellent Advanced Drone Project.
+By following this guide, you’ll successfully build a feature-rich drone capable of **follow-me**, **obstacle avoidance**, **gesture control**, and **voice command** functionalities. This project showcases the integration of hardware and software in a real-world application, making it an excellent Advanced Drone with a Single Board Computer.
 
 ---
 
