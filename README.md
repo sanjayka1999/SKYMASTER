@@ -56,7 +56,7 @@ Below is the list of hardware components used in this project:
 ## 💻 Software Setup
 
 ### **1. Software for Configuration of Pixhawk 6X Flight Controller**
-#### **QGroundControl**
+#### **[QGroundControl](https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html)**
 - **System Requirements**:  
   QGC should run well on any modern computer or mobile device. Performance will depend on the system environment, 3rd party applications, and available system resources. More capable hardware will provide a better experience. A computer with at least 8GB RAM, an SSD, Nvidia or AMD graphics, and an i5 or better CPU will be suitable for most applications.
 
