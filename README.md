@@ -13,9 +13,9 @@ This project transforms an **Orange Pi 5 Pro** into the brain of an advanced AI-
 - ✅ **Gesture Control**: Control the drone through hand-tracking gestures.
 - ✅ **Voice Commands**: Execute voice-based commands (optional).
 
-With this guide, you'll learn how to set up the hardware, configure the software, and implement AI features to create a robust autonomous drone.
+With this guide, you'll learn how to set up the hardware, configure the software, implement AI features, and conduct final testing to create a robust autonomous drone.
 
-The guide includes instructions for both **MacOS** and **Windows** users.
+The guide includes step-by-step instructions for both **MacOS** and **Windows** users.
 
 ---
 
@@ -138,6 +138,7 @@ pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
 
 ### **1. reCamera Setup**
 
+**Device**: Orange Pi 5 Pro  
 ```bash
 # Check camera
 v4l2-ctl --list-devices
@@ -164,6 +165,7 @@ python3 camera_test.py
 
 ### **2. TFMini LiDAR**
 
+**Device**: Orange Pi 5 Pro  
 ```bash
 # Enable UART
 sudo raspi-config  # Interface Options → Serial → Disable shell, enable hardware
@@ -185,6 +187,7 @@ while True:
 ### **3. Pixhawk MAVLink**
 
 #### For MacOS:
+**Device**: Orange Pi 5 Pro  
 ```bash
 # Start MAVProxy bridge
 pip3 install mavproxy
@@ -195,6 +198,7 @@ In **QGroundControl**:
 - Go to **Comm Links** → Add UDP Connection → Port: `14550`.
 
 #### For Windows:
+**Device**: Orange Pi 5 Pro  
 ```bash
 # Start MAVProxy bridge
 mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:192.168.1.100:14550
@@ -209,6 +213,8 @@ In **Mission Planner**:
 ## 🤖 AI Features Implementation (Python Code)
 
 ### **1. Follow-Me Mode**
+
+**Device**: Orange Pi 5 Pro  
 ```python
 # Object tracking (OpenCV + MAVLink)
 import cv2
@@ -227,6 +233,8 @@ while True:
 ---
 
 ### **2. Obstacle Avoidance**
+
+**Device**: Orange Pi 5 Pro  
 ```python
 # LiDAR + MAVLink
 import serial
@@ -244,6 +252,8 @@ while True:
 ---
 
 ### **3. Gesture Control**
+
+**Device**: Orange Pi 5 Pro  
 ```python
 # Gesture recognition using OpenCV and CNN
 import cv2
@@ -262,6 +272,8 @@ while True:
 ---
 
 ### **4. Voice Commands (Optional)**
+
+**Device**: Orange Pi 5 Pro  
 ```python
 # Speech recognition
 import speech_recognition as sr
@@ -276,6 +288,30 @@ with mic as source:
     command = r.recognize_google(audio)
     # Map command to MAVLink
 ```
+
+---
+
+## 🚁 Testing the Drone
+
+### **1. Pre-Flight Checklist**
+- Verify all hardware connections (reCamera, LiDAR, and Pixhawk 6X).
+- Ensure the Orange Pi 5 Pro is powered and running all necessary software.
+- Confirm the ground station (QGroundControl or Mission Planner) is connected to the Pixhawk.
+
+### **2. Testing Follow-Me Mode**
+- Place a target in front of the reCamera.
+- Run the **Follow-Me Mode** script on the Orange Pi.
+- Validate that the drone tracks the target and follows it.
+
+### **3. Testing Obstacle Avoidance**
+- Place an obstacle in the path of the drone.
+- Run the **Obstacle Avoidance** script on the Orange Pi.
+- Validate that the drone adjusts its path to avoid the obstacle.
+
+### **4. Testing Gesture Control**
+- Perform predefined gestures in front of the reCamera.
+- Run the **Gesture Control** script on the Orange Pi.
+- Validate that the drone responds to the gestures as expected.
 
 ---
 
@@ -317,4 +353,3 @@ Feel free to reach out for questions or collaborations:
 
 ---
 
-🚀 **Let’s build the future of autonomous drones!**
