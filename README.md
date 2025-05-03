@@ -20,7 +20,7 @@ The primary objective of this project is to design and implement a fully functio
 
 Below is the list of hardware components used in this project:
 
-1. **[Orange Pi 5 pro]([url](https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G?tag=usdeshoppin04-20&th=1))**: The onboard computer for running AI models and processing sensor data.
+1. **[Orange Pi 5 pro]([https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G?tag=usdeshoppin04-20&th=1])**: The onboard computer for running AI models and processing sensor data.
 2. **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**: Captures video for follow-me and gesture control features.
 3. **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)**: Captures voice commands for voice-based control.
 4. **[TFMini Plus LiDAR](https://www.amazon.com/Stemedu-0-1m-12m-Distance-Detection-Waterproof/dp/B07L8B2FVK)**: Measures distance and enables obstacle avoidance.
