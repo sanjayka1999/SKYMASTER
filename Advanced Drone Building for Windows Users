@@ -1,0 +1,158 @@
+SKYMASTER - Advanced AI Drone with Orange Pi 5 Pro (Windows Edition)
+A complete Windows guide for building an autonomous drone with Follow-Me, Obstacle Avoidance, Gesture Control, and Voice Commands
+
+📌 Overview
+This Windows-compatible guide details how to configure an Orange Pi 5 Pro as the AI brain for an advanced drone, integrating with Mission Planner on Windows. Features include:
+✅ Follow-Me Mode
+✅ Obstacle Avoidance
+✅ Gesture Control
+✅ Voice Commands (Optional)
+
+Key Hardware:
+
+🖥️ Orange Pi 5 Pro (Ubuntu 22.04)
+
+📷 reCamera
+
+🎤 ReSpeaker Mic Array
+
+📡 TFMini Plus LiDAR
+
+✈️ Pixhawk 6X
+
+🛠️ Hardware Setup (Windows Compatible)
+1. Orange Pi 5 Pro Connections
+Component	Connection	Windows Notes
+reCamera	USB 3.0	Test via PuTTY
+ReSpeaker Mic	USB 3.0	Verify in Ubuntu
+TFMini LiDAR	UART (/dev/ttyS0)	Configure in Ubuntu
+Pixhawk 6X	USB or Telemetry Radio	Connect to Mission Planner
+2. Pixhawk 6X Wiring
+Option 1: Direct USB to Windows PC
+
+Option 2: Telemetry Radio (3DR/SiK) between Pixhawk and Orange Pi
+
+💻 Software Installation (Windows)
+1. Mission Planner Setup
+Download: Mission Planner Latest
+
+Install: Run .exe with admin rights
+
+Configure:
+
+Select COM port (check Device Manager)
+
+Set baud rate to 57600
+
+2. Orange Pi 5 Pro Setup
+Step 1: Flash Ubuntu
+Use BalenaEtcher to flash Ubuntu Server 22.04 to SD card
+
+Boot Orange Pi and connect via:
+
+Ethernet (for SSH)
+
+PuTTY (for terminal access)
+
+Step 2: Install Dependencies
+bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y python3-pip git v4l-utils libportaudio2
+pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
+🔗 Connecting Orange Pi to Mission Planner
+Method 1: MAVProxy Forwarding
+On Orange Pi:
+
+bash
+mavproxy.py --master=/dev/ttyAMA0 --baudrate=57600 --out=udp:192.168.1.100:14550
+Replace 192.168.1.100 with your Windows PC IP
+
+In Mission Planner:
+
+UDP → Add connection → Port 14550
+
+Method 2: Telemetry Radio
+Connect SiK Radio to:
+
+Pixhawk TELEM2 port
+
+Orange Pi USB port
+
+In Mission Planner:
+
+Select COM port of the radio
+
+🚀 Sensor Configuration (Windows + Orange Pi)
+1. reCamera Setup
+bash
+# On Orange Pi via PuTTY:
+v4l2-ctl --list-devices
+python
+# Test script (camera_test.py)
+import cv2
+cap = cv2.VideoCapture(0)
+while True:
+    ret, frame = cap.read()
+    cv2.imshow("Frame", frame)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.release()
+2. TFMini LiDAR
+bash
+# Enable UART on Orange Pi:
+sudo raspi-config  # Interface Options → Serial → Disable shell
+sudo reboot
+python
+# Distance reading (lidar_test.py)
+import serial
+ser = serial.Serial('/dev/ttyS0', 115200)
+while True:
+    data = ser.read(9)
+    if data[0] == 0x59 and data[1] == 0x59:
+        print(f"Distance: {data[2] + data[3]*256} cm")
+3. MAVLink Commands
+python
+# Send commands from Orange Pi to Pixhawk
+from pymavlink import mavutil
+drone = mavutil.mavlink_connection('udp:192.168.1.100:14550')
+drone.mav.command_long_send(...)  # Example: Takeoff command
+🔧 Windows-Specific Debugging
+1. Mission Planner Connection Issues
+Check COM port in Device Manager
+
+Ensure baud rate matches (57600)
+
+Update USB drivers if Pixhawk not detected
+
+2. Orange Pi SSH Access
+Find Orange Pi IP using Advanced IP Scanner
+
+Connect via PuTTY:
+
+Host: orangepi@[IP]
+
+Password: orangepi
+
+3. MAVProxy Not Forwarding?
+Verify Windows firewall allows UDP port 14550
+
+Test connectivity:
+
+cmd
+ping [Orange Pi IP]
+📜 License
+MIT License - Free for personal and commercial use.
+
+📧 Contact
+Email: sanjaykathula7@gmail.com
+
+GitHub: github.com/sanjayka1999
+
+🚀 Happy building with Windows!
+
+Appendix: Windows Tools Download Links
+Tool	Purpose	Link
+Mission Planner	Flight Control	Download
+PuTTY	SSH to Orange Pi	Download
+Advanced IP Scanner	Find Orange Pi IP	Download
+(Note: Orange Pi setup remains Ubuntu-based; Windows is used for Mission Planner ground station)
