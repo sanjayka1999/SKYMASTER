@@ -1,5 +1,6 @@
 # SKYMASTER - Advanced AI Drone with Orange Pi 5 Pro
-A complete guide to building an autonomous drone with **Follow-Me**, **Obstacle Avoidance**, **Gesture Control**, and **Voice Commands** using cutting-edge hardware and software integration.
+
+A comprehensive guide to building a fully autonomous drone with advanced features such as **Follow-Me**, **Obstacle Avoidance**, **Gesture Control**, and **Voice Commands**. This project demonstrates the integration of AI, computer vision, and sensor technologies with the **Orange Pi 5 Pro** and **Pixhawk 6X**, creating an advanced drone for research, learning, or real-world applications.
 
 ---
 
@@ -7,14 +8,16 @@ A complete guide to building an autonomous drone with **Follow-Me**, **Obstacle 
 
 This project transforms an **Orange Pi 5 Pro** into the brain of an advanced AI-powered drone, integrating:
 
-✅ **Follow-Me Mode** (Computer Vision Tracking)  
-✅ **Obstacle Avoidance** (LiDAR + AI)  
-✅ **Gesture Control** (Hand Tracking)  
-✅ **Voice Commands** (Optional)
+- ✅ **Follow-Me Mode**: Automatically follow a target using computer vision tracking.
+- ✅ **Obstacle Avoidance**: Detect and avoid obstacles in real time utilizing LiDAR and AI algorithms.
+- ✅ **Gesture Control**: Control the drone through hand-tracking gestures.
+- ✅ **Voice Commands**: Execute voice-based commands (optional).
+
+With this guide, you'll learn how to set up the hardware, configure the software, and implement AI features to create a robust autonomous drone.
 
 ---
 
-## 📂 Key Hardware
+## 📂 Key Hardware Components
 
 | **Component**           | **Purpose**                                                                 |
 |--------------------------|-----------------------------------------------------------------------------|
@@ -150,7 +153,7 @@ In **QGroundControl**:
 
 ---
 
-## 🤖 AI Features Implementation
+## 🤖 AI Features Implementation (Python Code)
 
 ### **1. Follow-Me Mode**
 ```python
@@ -187,6 +190,42 @@ while True:
 
 ---
 
+### **3. Gesture Control**
+```python
+# Gesture recognition using OpenCV and CNN
+import cv2
+from keras.models import load_model
+
+model = load_model('gesture_model.h5')
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+    # Preprocess frame for CNN
+    prediction = model.predict(frame)
+    # Map prediction to drone commands
+```
+
+---
+
+### **4. Voice Commands (Optional)**
+```python
+# Speech recognition
+import speech_recognition as sr
+from pymavlink import mavutil
+
+r = sr.Recognizer()
+mic = sr.Microphone()
+
+with mic as source:
+    print("Listening for commands...")
+    audio = r.listen(source)
+    command = r.recognize_google(audio)
+    # Map command to MAVLink
+```
+
+---
+
 ## 🔧 Debugging Tips
 
 1. **Camera not detected?**
@@ -200,6 +239,10 @@ sudo modprobe v4l2loopback
 sudo chmod 666 /dev/ttyAMA0  # Fix permissions
 ```
 
+3. **LiDAR not responding?**
+- Ensure UART is enabled in `raspi-config`.
+- Verify connections and baud rate.
+
 ---
 
 ## 💡 Challenges & Solutions
@@ -209,12 +252,6 @@ sudo chmod 666 /dev/ttyAMA0  # Fix permissions
 | **Power Consumption**    | Use a high-capacity LiPo battery.           |
 | **Thermal Management**   | Install a heatsink/fan for the Orange Pi.   |
 | **Real-Time Performance**| Optimize AI models for low latency.         |
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** - free for personal and commercial use.
 
 ---
 
