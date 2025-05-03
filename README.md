@@ -55,51 +55,42 @@ Below is the list of hardware components used in this project:
 
 ## 💻 Software Setup
 
-### **Software for Configuration of Pixhwak 6x Flight Controller**
-**QGroundControl**
-System Requirements
-QGC should run well on any modern computer or mobile device. Performance will depend on the system environment, 3rd party applications, and available system resources. More capable hardware will provide a better experience. A computer with at least 8Gb RAM, an SSD, Nvidia or AMD graphics and an i5 or better CPU will be suitable for most applications.
+### **1. Software for Configuration of Pixhawk 6X Flight Controller**
+#### **QGroundControl**
+- **System Requirements**:  
+  QGC should run well on any modern computer or mobile device. Performance will depend on the system environment, 3rd party applications, and available system resources. More capable hardware will provide a better experience. A computer with at least 8GB RAM, an SSD, Nvidia or AMD graphics, and an i5 or better CPU will be suitable for most applications.
 
-For the best experience and compatibility, we recommend you the newest version of your operating system.
-Mac OS X
-QGroundControl can be installed on macOS 10.11 or later:
+- **Installation on macOS**:
+  1. Download `QGroundControl.dmg`.
+  2. Double-click the `.dmg` file to mount it, then drag the QGroundControl application to your Application folder.
+  3. To open the QGC app for the first time:
+     - Right-click the QGC app icon, select **Open** from the menu. You will only be presented with an option to Cancel. Select **Cancel**.
+     - Right-click the QGC app icon again, select **Open** from the menu. This time you will be presented with the option to **Open**.
 
-Download QGroundControl.dmg.
-Double-click the .dmg file to mount it, then drag the QGroundControl application to your Application folder.
-INFO
+- **Installation on Windows**:
+  1. Download `QGroundControl-installer.exe`.
+  2. Double-click the executable to launch the installer.
+  3. The Windows installer creates 3 shortcuts: **QGroundControl**, **GPU Compatibility Mode**, and **GPU Safe Mode**. Use the first shortcut unless you experience startup or video rendering issues. For more information, see **Troubleshooting QGC Setup > Windows: UI Rendering/Video Driver Issues**.
 
-QGroundControl continues to not be signed which causes problem on Catalina. To open QGC app for the first time:
+---
 
-Right-click the QGC app icon, select Open from the menu. You will only be presented with an option to Cancel. Select Cancel.
-Right-click the QGC app icon again, Open from the menu. This time you will be presented with the option to Open.
+### **2. Step 1: Operating System Installation**
+- Install a compatible Linux distribution like **Ubuntu** or **Armbian** on the Orange Pi 5.  
+  Refer to the official [Orange Pi 5 Pro Support Page](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
 
-Windows
-QGroundControl can be installed on 64 bit versions of Windows:
+---
 
-Download QGroundControl-installer.exe.
-Double click the executable to launch the installer.
-INFO
-
-The Windows installer creates 3 shortcuts: QGroundControl, GPU Compatibility Mode, GPU Safe Mode. Use the first shortcut unless you experience startup or video rendering issues. For more information see Troubleshooting QGC Setup > Windows: UI Rendering/Video Driver Issues.
-
-INFO
-
-Prebuilt QGroundControl versions from 4.0 onwards are 64-bit only. It is possible to manually build 32 bit versions (this is not supported by the dev team).
-
-### **Step 1: [Operating System Installation](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html)**
-- Install a compatible Linux distribution like **Ubuntu** or **Armbian** on the Orange Pi 5.
-
-### **Step 2: Install Software Dependencies**
-1. Update the system:
+### **3. Step 2: Install Software Dependencies**
+1. **Update the System**:
    ```bash
    sudo apt update && sudo apt upgrade
    ```
-2. Install Python and its required libraries:
+2. **Install Python and Required Libraries**:
    ```bash
    sudo apt install python3-pip
    pip3 install numpy opencv-python pyserial pyaudio tensorflow pymavlink
    ```
-3. Install AI frameworks:
+3. **Install AI Frameworks**:
    ```bash
    pip3 install tensorflow
    ```
