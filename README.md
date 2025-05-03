@@ -20,7 +20,7 @@ The primary objective of this project is to design and implement a fully functio
 
 Below is the list of hardware components used in this project:
 
-1. **Orange Pi 5 pro(https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G?tag=usdeshoppin04-20&th=1)]**: The onboard computer for running AI models and processing sensor data.
+1. **[Orange Pi 5 pro](https://www.amazon.com/Orange-Pi-Pro-Frequency-Bluetooth/dp/B0CSJVDL5G/ref=sr_1_1?crid=1C6HSRKVRTPJS&dib=eyJ2IjoiMSJ9.z3ba8-5O3PZ88_jo2L6pQURhyN1B4uLdZ2VRQxh_fwuYZ4sAhmT3SRsrFNwcWpFIa88_CVoLqF9yyzVi2NSrN8NRFzdykwxpTdF0OXsQo7cgAlfXXlVkF4nmhZC3KyAC0sW79hu9GuEYNq7d471LDKzst4xfvuDa7UpsaCj9Zdxtbd1uIj3PfW8sxW-pSalQhlYaT2C72KItNTwYH8Zv_VDGL6BoN_ruJS21lJwzLx4.r7C0W_mUVtm9Ej_cpenAO_dzJOEJ_Pakd7-3j3smvVs&dib_tag=se&keywords=orange%2Bpi%2B5%2Bpro&qid=1746288332&sprefix=orange%2Bpi%2B5%2Bpro%2Caps%2C131&sr=8-1&th=1)** The onboard computer for running AI models and processing sensor data.
 2. **[reCamera](https://www.seeedstudio.com/reCamera-2002w-64GB-p-6249.html)**: Captures video for follow-me and gesture control features.
 3. **[ReSpeaker USB Mic Array](https://www.seeedstudio.com/ReSpeaker-USB-Mic-Array-p-4247.html)**: Captures voice commands for voice-based control.
 4. **[TFMini Plus LiDAR](https://www.amazon.com/Stemedu-0-1m-12m-Distance-Detection-Waterproof/dp/B07L8B2FVK)**: Measures distance and enables obstacle avoidance.
