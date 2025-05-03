@@ -15,7 +15,7 @@ This project transforms an **Orange Pi 5 Pro** into the brain of an advanced AI-
 
 With this guide, you'll learn how to set up the hardware, configure the software, and implement AI features to create a robust autonomous drone.
 
-This guide is divided into two sections to accommodate both **MacOS** and **Windows** users.
+The guide includes instructions for both **MacOS** and **Windows** users.
 
 ---
 
@@ -52,11 +52,9 @@ This guide is divided into two sections to accommodate both **MacOS** and **Wind
 
 ---
 
-## 💻 Software Installation
+## 💻 Software Installation (MacOS)
 
-### For MacOS Users
-
-#### **1. Ground Station Setup with QGroundControl**
+### **1. Ground Station Setup with QGroundControl**
 
 - **Purpose**: Configure and control the Pixhawk 6X flight controller.
 - **Download**: [QGroundControl.dmg](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html)
@@ -69,9 +67,35 @@ This guide is divided into two sections to accommodate both **MacOS** and **Wind
 
 ---
 
-### For Windows Users
+### **2. Orange Pi 5 Pro Setup (Ubuntu 22.04)**
 
-#### **1. Ground Station Setup with Mission Planner**
+#### **Step 1: Flash Ubuntu**
+1. **Download Ubuntu Image**:  
+   Visit the [Orange Pi 5 Pro Downloads](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-5-Pro.html).
+2. **Flash Image**:  
+   Use [BalenaEtcher](https://www.balena.io/etcher/) to flash the image to an SD card.
+3. **First Boot & Login**:
+   - Insert the SD card, connect HDMI, keyboard, and power.
+   - Default credentials:
+     - **Username**: orangepi  
+     - **Password**: orangepi  
+
+#### **Step 2: Install Dependencies**
+Run the following commands in the Orange Pi terminal:
+```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python & Libraries
+sudo apt install -y python3-pip git v4l-utils libportaudio2
+pip3 install opencv-python pyserial pyaudio pymavlink dronekit tensorflow
+```
+
+---
+
+## 💻 Software Installation (Windows)
+
+### **1. Ground Station Setup with Mission Planner**
 
 - **Purpose**: A Windows-compatible flight control software for Pixhawk.
 - **Download**: [Mission Planner](https://firmware.ardupilot.org/Tools/MissionPlanner/)
