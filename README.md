@@ -269,6 +269,5 @@ def check_failsafe():
 
 ## Made by
 - **Sanjay Kathula**
-- **Sai Kumar Gadde**
 
 ---
